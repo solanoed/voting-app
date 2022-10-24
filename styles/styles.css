@@ -160,8 +160,8 @@
         width: 60px;
     }
 
-    .votes-number-trump,
-    .votes-number-biden {
+    .votes-number-petro,
+    .votes-number-rodolfo {
         font-weight: 700;
         font-size: 2.5rem;
     }
@@ -272,16 +272,16 @@
         border-top: 2px solid var(--black);
     }
 
-    .btn-trump,
-    .btn-biden {
+    .btn-petro,
+    .btn-rodolfo {
         transition: all 0.5s ease;
     }
 
-    .btn-trump {
+    .btn-petro {
         background: var(--btn-red);
     }
 
-    .btn-biden {
+    .btn-rodolfo {
         background: var(--btn-light-blue);
     }
 
