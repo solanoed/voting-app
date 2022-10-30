@@ -1,0 +1,377 @@
+    /***************
+    * BASE STYLES *
+    ***************/
+
+
+    /* Variables */
+
+    :root {
+        --black: #1b1b29;
+        --white: #ffffff;
+        --btn-red: #fe4c13;
+        --btn-red-hover: #ee3a01;
+        --btn-light-blue: #3fb3e4;
+        --btn-light-blue-hover: #21a7e0;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body,
+    html,
+    #app {
+        height: 100%;
+    }
+
+    html {
+        font-size: 62.5%;
+    }
+
+    body {
+        font-family: "Montserrat", sans-serif;
+        overflow: hidden; /* Hide scrollbars */
+
+    }
+
+
+    /*******
+    * APP *
+    ********/
+
+    #app {
+        background: var(--bg-overlay);
+        overflow-y: scroll;
+    }
+
+    .app-overlay {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background: url(../assets/bandera.jpg) no-repeat center center fixed;
+        filter: drop-shadow(2px 20px 10px #000);
+        background-size: cover;
+        z-index: -1;
+    }
+
+
+    /**********
+    * HEADER *
+    **********/
+
+    header {
+        background: var(--black);
+        padding: 1rem 2rem;
+    }
+
+    .logo {
+        color: var(--white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    /* ELECTION */
+
+    .logo h1 {
+        font-size: 4rem;
+    }
+
+
+    /* Star */
+
+    .logo img {
+        margin-right: 1rem;
+        width: 4rem;
+    }
+
+    .logopacto{
+        max-height: 40px;
+        width: 100%;
+        object-fit: contain;
+    }
+    .logoliga{
+        max-height: 40px;
+        width: 100%;
+        object-fit: contain;
+    }
+
+    /*********
+    * MAIN *
+    ********/
+
+    main {
+        height: 100%;
+    }
+
+    .cards {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: 5rem 0;
+    }
+
+
+    /* Card */
+
+    .card {
+        width: 25rem;
+        border: 2px solid var(--black);
+        overflow: hidden;
+        box-shadow: 15px 15px 6px var(--shadow);
+        transition: all 0.5 ease;
+        cursor: pointer;
+    }
+
+    .card:first-of-type {
+        margin-bottom: 5rem;
+    }
+
+
+    /* Card image */
+
+    .card-image {
+        width: 25rem;
+        height: 20rem;
+        object-fit: cover;
+        vertical-align: middle;
+    }
+
+
+    /* Card information */
+
+    .card-info {
+        display: flex;
+        justify-content: space-evenly;
+        background: var(--white);
+        color: var(--black);
+        padding: 2rem 0;
+    }
+
+    .candidate-votes {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 60px;
+    }
+
+    .votes-number-petro,
+    .votes-number-rodolfo {
+        font-weight: 700;
+        font-size: 2.5rem;
+    }
+
+    .votes-text {
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+
+    /* btns header*/
+
+
+    .logo {
+        display: flexbox;
+        gap: 60px;
+    }
+    .votes,.atv{
+        height: 40px;
+        width: 140px;
+        background-color: #1b1b29;
+        border-radius:  6px ;
+        border-color: #ffffff;
+        color: #ffffff;
+        font-size: 20px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: bold;
+    }
+
+    .text{
+        height: 30px;
+        width: 300px;
+        text-align: center;
+        color: #1b1b29;
+    }
+    .votes:hover{
+        cursor: pointer;
+        border-color: #1b1b29;
+        background-color: #ffffff;
+        color: #1b1b29;
+
+        
+    }
+    .atv:hover{
+        cursor: pointer;
+        border-color: #1b1b29;
+        background-color: #ffffff;
+        color: #1b1b29;
+
+        
+    }
+    .out:hover{
+        cursor: pointer;
+        border-color: #1b1b29;
+        background-color: #ffffff;
+        color: #1b1b29;
+
+        
+    }
+    .login:hover{
+        cursor: pointer;
+        border-color: #1b1b29;
+        background-color: #ffffff;
+        color: #1b1b29;
+
+        
+    }
+
+    /* Lines */
+
+    .line {
+        width: 0.1rem;
+        background: var(--black);
+    }
+
+
+    /* Candidate info */
+
+    .candidate-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .candidate-name {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    .candidate-party {
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+
+    /* Card button */
+
+    .card-btn {
+        width: 100%;
+        border: none;
+        outline: none;
+        font-size: 1.5rem;
+        font-weight: 700;
+        padding: 1.5rem 0;
+        color: var(--white);
+        cursor: pointer;
+        border-top: 2px solid var(--black);
+    }
+
+    .btn-petro,
+    .btn-rodolfo {
+        transition: all 0.5s ease;
+    }
+
+    .btn-petro {
+        background: var(--btn-red);
+    }
+
+    .btn-rodolfo {
+        background: var(--btn-light-blue);
+    }
+
+    .container {
+        position: relative;
+        align-items: center;
+        padding: 20px 30px;
+        width: 400px;
+        background: #0b0909;
+        border-radius: 4px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .signin {
+        padding: 5px 12px;
+        font-size: 3rem;
+        background: 1inear-gradient(45deg, #00d5fc, #046af6);
+        margin-bottom: 10px;
+        border-radius: 50px;
+        text-align: right;
+        margin-left: 4px;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: 0.3s ease;
+    }
+
+    .signout {
+        padding: 5px 12px;
+        font-size: 3rem;
+        background: 1inear-gradient(45deg, #00d5fc, #046af6);
+        margin-bottom: 10px;
+        border-radius: 50px;
+        text-align: right;
+        margin-left: 4px;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: 0.3s ease;
+    }
+    /* RESPONSIVE */
+    @media only screen and (max-width: 930px) {
+        .votes,.atv {
+            height: 40px;
+            width: 140px;
+            font-size: 15px;
+            font-family: "Montserrat", sans-serif;
+        }
+        .logo {
+            display: flexbox;
+            gap: 40px;
+        }
+    }
+    @media only screen and (max-width: 701px) {
+        .logo h1{
+            font-size: 15px;
+        }
+        .logo img{
+            max-width: 20px;
+        }
+        .votes,.atv {
+            height: 30px;
+            width: 90px;
+            font-size: 10px;
+            font-family: "Montserrat", sans-serif;
+        }
+        .logo {
+            display: flexbox;
+            gap: 20px;
+            justify-content: flex-start;
+        }
+    }
+    @media only screen and (max-width: 435px){
+        .logo {
+            display: flexbox;
+            gap: 2px;
+            justify-content: flex-start;
+        }
+        .logo img{
+            max-width: 15px;
+        }
+        .logo h1{
+            font-size: 12px;
+        }
+        .text{
+            height: 15px;
+            width: 100px;
+            font-size: 10px
+        }
+        .votes,.atv {
+            height: 20px;
+            width: 60px;
+            font-size: 7px;
+        }
+    }
