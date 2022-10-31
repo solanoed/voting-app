@@ -115,7 +115,9 @@
         flex-direction: column;
         padding: 5rem 0;
     }
-   
+    /* .main-container .email-container{
+      width: 1000px;
+    } */
     .email{
         padding:30px;
         font-size: 2rem;

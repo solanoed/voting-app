@@ -6,71 +6,109 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Voting App</title>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
-        rel="stylesheet"
-      />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/styles/voting.css" />
     <link rel="stylesheet" href="/styles/voting-media-queries.css" />
-    <!-- The next 2 scripts are the one that allow us to connect to the moralis functions in our project-->
+    <link rel="stylesheet" href="/styles/form-style.css" />
+
     <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
     <script src="https://unpkg.com/moralis-v1/dist/moralis.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    
   </head>
 
   <body onload="charge()">
-    <!-- APP -->
     <div id="app">
       <div class="app-overlay"></div>
-      <!-- HEADER -->
+
       <header>
         <div class="logo">
           <a href="/index.html">
-
             <img src="/assets/colombita.png" />
           </a>
-            <h1>REGISTRO ELECCIONES COLOMBIA 2022</h1>
+          <h1>REGISTRO ELECCIONES COLOMBIA 2022</h1>
         </div>
       </header>
-      <!-- MAIN-->
-      <main>
 
+      <main>
         <div class="main-container">
-          <div class="email">
-            <p class="text-1">Para poder continuar con el proceso de votacion debes verificarte por medio de tu correo o de tu celular</p>
-            <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-              <!-- Email address input-->
-              <div class="row input-group-newsletter">
-                  <div class="col"><input class="form-control" id="email" type="email" placeholder="Enter email address..." aria-label="Enter email address..." data-sb-validations="required,email" /></div>
-                  <div class="col-auto"><button class="btn btn-primary" id="submitButton" type="submit">Verificar</button></div>
-              </div>
-              <div class="invalid-feedback mt-2" data-sb-feedback="email:required">An email is required.</div>
-              <div class="invalid-feedback mt-2" data-sb-feedback="email:email">Email is not valid.</div>
-              <!-- Submit success message-->
-              <!---->
-              <!-- This is what your users will see when the form-->
-              <!-- has successfully submitted-->
-              <div class="d-none" id="submitSuccessMessage">
-                  <div class="text-center mb-3 mt-2">
-                      <div class="fw-bolder">Form submission successful!</div>
-                      To activate this form, sign up at
-                      <br />
-                      <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                  </div>
-              </div>
-              <!-- Submit error message-->
-              <!---->
-              <!-- This is what your users will see when there is-->
-              <!-- an error submitting the form-->
-              <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3 mt-2">Error sending message!</div></div>
-          </form>
-          </div>
-          <div class="phone">
-            verificacion de telefono
-          </div>
+          
+            <!-- multistep form -->
+            <form id="msform">
+              <!-- progressbar -->
+              <ul id="progressbar">
+                <li class="active">Account Setup</li>
+                <li>Social Profiles</li>
+                <li>Personal Details</li>
+              </ul>
+              <!-- fieldsets -->
+              <fieldset>
+                <h2 class="fs-title">Create your account</h2>
+                <h3 class="fs-subtitle">This is step 1</h3>
+                <input type="text" name="email" placeholder="Email" />
+                <input type="password" name="pass" placeholder="Password" />
+                <input
+                  type="password"
+                  name="cpass"
+                  placeholder="Confirm Password"
+                />
+                <input
+                  type="button"
+                  name="next"
+                  class="next action-button"
+                  value="Next"
+                />
+              </fieldset>
+              <fieldset>
+                <h2 class="fs-title">Social Profiles</h2>
+                <h3 class="fs-subtitle">Your presence on the social network</h3>
+                <input type="text" name="twitter" placeholder="Twitter" />
+                <input type="text" name="facebook" placeholder="Facebook" />
+                <input type="text" name="gplus" placeholder="Google Plus" />
+                <input
+                  type="button"
+                  name="previous"
+                  class="previous action-button"
+                  value="Previous"
+                />
+                <input
+                  type="button"
+                  name="next"
+                  class="next action-button"
+                  value="Next"
+                />
+              </fieldset>
+              <fieldset>
+                <h2 class="fs-title">Personal Details</h2>
+                <h3 class="fs-subtitle">We will never sell it</h3>
+                <input type="text" name="fname" placeholder="First Name" />
+                <input type="text" name="lname" placeholder="Last Name" />
+                <input type="text" name="phone" placeholder="Phone" />
+                <textarea name="address" placeholder="Address"></textarea>
+                <input
+                  type="button"
+                  name="previous"
+                  class="previous action-button"
+                  value="Previous"
+                />
+                <input
+                  type="submit"
+                  name="submit"
+                  class="submit action-button"
+                  value="Submit"
+                />
+              </fieldset>
+            </form>
+          
+          
         </div>
-        
       </main>
     </div>
-    <script src="js/app.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/two-step.js"></script>
+
   </body>
 </html>
