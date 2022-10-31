@@ -104,3 +104,4 @@ setInterval(getActualVotes,1000);
 document.getElementById("btn-petro").onclick = votePetro;
 document.getElementById("btn-rodolfo").onclick = voteRodolfo;
 document.getElementById("btn-AllowToVote").onclick = rightToVote;
+
