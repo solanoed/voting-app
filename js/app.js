@@ -47,35 +47,66 @@ async function logOut(){
 
 //object with the variables that will allow us to get the votes for Petro
 const PetroVotes = {
-  
+
+    contractAddress: "0xEd7e584717F2aa7fFaaB61A6eb01d8Bf0aB1d3B4",
+    functionName: "petroVotes",
+    abi: [{"inputs":[],"name":"petroVotes","outputs":[{"internalType":"uint256","name":"cant","type":"uint256"}],"stateMutability":"view","type":"function"}],
+
 };
 
 //object with the variables that will allow us to get the votes for Rodolfo
 const RodolfoVotes = {
-     
+
+    contractAddress: "0xEd7e584717F2aa7fFaaB61A6eb01d8Bf0aB1d3B4",
+    functionName: "rodolfoVotes",
+    abi: [{"inputs":[],"name":"rodolfoVotes","outputs":[{"internalType":"uint256","name":"cant","type":"uint256"}],"stateMutability":"view","type":"function"}],
+
 };
 
 //function that using a Moralis function giving of parameter the Objects we create beforehand call the function that allow us to get the Votes for each Candidate
 async function getActualVotes(){
 
     //fucntions that get the value in the smart contract and we assign them to local variables
-    
+    const cantVotesPetro = await Moralis.executeFunction(PetroVotes);
+    const cantVotesRodolfo = await Moralis.executeFunction(RodolfoVotes);
 
     //we create variables that get the wuery information that will show the votes for each candidate
-    
+    //let votesPetro = document.querySelector('.votes-number-trump');
+    //let votesRodolfo = document.querySelector('.votes-number-biden');
 
     //we assign to the innerHTML of each wyery information their respective quantity of votes and at the same time we turn them into a decimal value insted of a hexadecimal
-   
+    //votesPetro.innerHTML = parseInt(cantVotesPetro._hex,16);
+    //votesRodolfo.innerHTML = parseInt(cantVotesRodolfo._hex,16);
 }
 
 
 //Local functions that call the smart contract function ir oder to vote for each candidate following the same principal of the Previous Moralis functionExecute
 async function votePetro(){
 
+    let options ={
+        contractAddress: "0xEd7e584717F2aa7fFaaB61A6eb01d8Bf0aB1d3B4",
+        functionName: "vote",
+        abi: [{"inputs":[{"internalType":"uint256","name":"proposal","type":"uint256"}],"name":"vote","outputs":[],"stateMutability":"nonpayable","type":"function"}],
+        params:{
+            proposal: 0
+        }
+    }
+
+    await Moralis.executeFunction(options);
 
 }
 async function voteRodolfo(){
 
+    let options ={
+        contractAddress: "0xEd7e584717F2aa7fFaaB61A6eb01d8Bf0aB1d3B4",
+        functionName: "vote",
+        abi: [{"inputs":[{"internalType":"uint256","name":"proposal","type":"uint256"}],"name":"vote","outputs":[],"stateMutability":"nonpayable","type":"function"}],
+        params:{
+            proposal: 1
+        }
+    }
+
+    await Moralis.executeFunction(options);
 
 }
 
@@ -83,6 +114,20 @@ async function voteRodolfo(){
 //Local Function that allow the chairman to give right to vote to the array of wallets store on the database
 async function rightToVote(){
 
+    //we get the array and assign it to a local variable
+    let array ;
+
+    //here we will send the array to the blockchain
+    let options ={
+        contractAddress: "0xEd7e584717F2aa7fFaaB61A6eb01d8Bf0aB1d3B4",
+        functionName: "vote",
+        abi: [{"inputs":[{"internalType":"address[]","name":"_users","type":"address[]"}],"name":"whitelistUsers","outputs":[],"stateMutability":"nonpayable","type":"function"}],
+        params:{
+            _users: array
+        }
+    }
+
+    await Moralis.executeFunction(options);
 
 }
 
