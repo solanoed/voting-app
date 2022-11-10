@@ -1,0 +1,132 @@
+{
+  "info": {
+    "_postman_id": "0fa0aa73-c8ae-4eee-b3a1-bb61136320da",
+    "name": "VotingSystem",
+    "description": "Documentación para la API encargada de realizar algunas de las funciones del sistema de votaciones.\n\nEn la API existen 3 modelos para el manejo de los datos, los modelos son:\n\n\\-Usuario\n\n\\-Candidato\n\n\\-Cartera\n\nCada uno de los modelos serán representados en los archivos relacionados a esta API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Usuario",
+      "item": [
+        {
+          "name": "Verificar Usuario por correo",
+          "id": "d9929417-7ba3-46f2-af84-e6f7a681c9cb",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"correo\":\"luquef@uninorte.edu.co\"\r\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "http://{{URL}}/verify",
+              "protocol": "http",
+              "host": ["{{URL}}"],
+              "path": ["verify"],
+              "query": [{ "key": "correo", "value": "\"\"", "disabled": true }]
+            },
+            "description": "Al hacer esta petición es necesario enviar en el cuerpo un json que contenga el correo de la persona a la que se le va enviar el código de verificación. Al realizar el envío del correo se recibe el último mensaje del servidor.\n\nEsto está pensado para que se ingrese un código en el front y luego se envíe a la ruta /registrar para verificar si son inguales, al serlo se crea el usuario sino manda un mensaje de error."
+          },
+          "response": []
+        },
+        {
+          "name": "Crear Usuario",
+          "id": "00c3c9c0-25b1-4435-b083-2c596bc36bfb",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[{\r\n    \"correo\":\"luquef@uninorte.edu.co\",\r\n    \"tel\":\"\",\r\n    \"hadRegistered\":false\r\n},{\r\n    \"codigo\":1234\r\n}]",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{URL}}/registrar",
+            "description": "Esta ruta está encargada de validar el código de verificación y crear el usuario."
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar Usuario",
+          "id": "a71846af-7597-460a-9db0-29b28b622a2c",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\":\"luquef@uninorte.edu.co\"\r\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{URL}}/updateUser:id",
+            "description": "Como su nombre lo indica actualiza el usuario.\n\n(Aún está en desarrollo)"
+          },
+          "response": []
+        }
+      ],
+      "id": "dd69a5a3-4b3a-49a5-8951-af3843ba0b5b"
+    },
+    {
+      "name": "Candidato",
+      "item": [
+        {
+          "name": "Obtener candidatos",
+          "id": "80f3c2bb-dfb0-4b88-b57a-f984313f007a",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{URL}}/candidatos",
+            "description": "Obtener los candidatos en formato JSON."
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar Candidato",
+          "id": "8752d815-51b5-4c8a-85f7-acc7ca9a80ef",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{URL}}/updateCandidato:id",
+            "description": "(En desarrollo)"
+          },
+          "response": []
+        }
+      ],
+      "id": "5ed368d6-b68f-4a3a-be46-1cf9815a407d"
+    },
+    {
+      "name": "Cartera",
+      "item": [
+        {
+          "name": "Crear Cartera",
+          "id": "11890322-468a-414d-b29e-17db6da1a70b",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"hash\":\"sdjansidqwhiasdp20402\"\r\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{URL}}/crearcartera",
+            "description": "Crear cartera"
+          },
+          "response": []
+        }
+      ],
+      "id": "493b0440-affb-40db-828f-ba14b946f672"
+    }
+  ],
+  "variable": [
+    {
+      "id": "60346093-961f-492f-b291-a8146f1821e2",
+      "key": "URL",
+      "value": "localhost:3001"
+    }
+  ]
+}
