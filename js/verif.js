@@ -18,6 +18,12 @@
   };
   
   const verifCorreo = () => {
-    document.getElementById("error-message").style.display = "block";
+
     document.getElementById("normal-message").style.display = "none";
+    document.getElementById("error-message").style.display = "block";
+    //Animar el mensaje
+    document.getElementById("error-message").classList.add('animate__animated');
+    document.getElementById("error-message").classList.add('animate__headShake');
+    
+
   };
