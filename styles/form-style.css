@@ -26,15 +26,17 @@ body {
 #msform fieldset {
 	background: white;
 	border: 0 none;
-	border-radius: 3px;
-	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+	border-radius: 13px;
+	box-shadow: 0 0 15px 1px rgba(121, 121, 121, 0.4);
 	padding: 20px 30px;
 	box-sizing: border-box;
 	width: 80%;
 	margin: 0 10%;
-	
-	/*stacking fieldsets above each other*/
-	position: relative;
+	/*stackingfieldsetsaboveeachother*/position: relative;
+	-webkit-border-radius: 13px;
+	-moz-border-radius: 13px;
+	-ms-border-radius: 13px;
+	-o-border-radius: 13px;
 }
 /*Hide all except first fieldset*/
 #msform fieldset:not(:first-of-type) {
@@ -97,7 +99,7 @@ body {
 	text-transform: uppercase;
 	font-size: 12px;
   font-weight: bold;
-	width: 33.33%;
+	width: 50%;
 	float: left;
 	position: relative;
 }
@@ -793,6 +795,7 @@ fieldset {
   padding: 0;
   margin: 0;
   border: 0;
+ 
 }
 
 legend {
