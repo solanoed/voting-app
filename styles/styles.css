@@ -63,6 +63,8 @@
   --bs-body-bg: #fff;
 }
 
+
+
 *,
 *::before,
 *::after {
@@ -95,6 +97,7 @@ a:active {
   display:flex;
   align-items: center;
   justify-content: space-around;
+  padding: 20px;
 }
 body {
   margin: 0;
