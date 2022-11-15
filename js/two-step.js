@@ -1,55 +1,47 @@
-
 //jQuery time
 var current_fs, next_fs, previous_fs; //fieldsets
 var left, opacity, scale; //fieldset properties which we will animate
 var animating; //flag to prevent quick multi-click glitches
-
+var next_bool = false;
+var user_email = {};
 const getEmail = () => {
-
   const email = {
     correo: document.getElementById("email-input").value,
     pass: document.getElementById("password-input").value,
   };
 
-  return email
+  return email;
 };
 
-let fetchUser = async ({correo,pass}) => {
-  
+let fetchUser = async ({ correo, pass }) => {
   try {
-    await axios.post('https://api-votaciones.vercel.app/login', {correo,pass} )
-    .then(({data})=>{
-      const {hadRegistered, tokenSession} = data;
-      console.log(hadRegistered, tokenSession)
-      if(hadRegistered){
-        next()
-        localStorage.setItem('key', tokenSession );
-        console.log("popo")
-      }else{
-        errorInter("Ya usted ha registrado su voto")
-        
-      }
-    })
-    // .catch(
-    //   ({response})=>{
-    //     // const error = response.data.message;
-    //     // errorInter(error)
-    //     console.log(response)
-    //   }
-    // )
+    await axios
     
+      .post("https://api-votaciones.vercel.app/login", { correo, pass })
+      .then(({ data }) => {
+        const { hadRegistered, tokenSession } = data;
+        console.log(hadRegistered, tokenSession);
+        if (hadRegistered===false) {
+          console.log("se registro")
+          next_bool = true;
+        } else {
+          // next_bool = false;
+        }
+      })
+      .catch(({ response }) => {
+        next_bool = false
+        console.log(next_bool)
+        // const error = response.data.message;
+        // errorInter(error)
+        console.log(response);
+      });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-
-
 };
 
-
-const errorInter = (error) => {
-
+const errorInter = (error = "No") => {
   if (error == "Usuario no encontrado") {
-
     document.getElementById("normal-message").style.display = "none";
     document.getElementById("error-message-2").style.display = "none";
     document.getElementById("error-message").style.display = "block";
@@ -57,8 +49,9 @@ const errorInter = (error) => {
 
     document.getElementById("error-message").classList.add("animate__animated");
 
-    document.getElementById("error-message").classList.add("animate__headShake");
-
+    document
+      .getElementById("error-message")
+      .classList.add("animate__headShake");
   } else if (error == "Contraseña incorrecta") {
     document.getElementById("error-message-3").style.display = "none";
     document.getElementById("normal-message").style.display = "none";
@@ -71,12 +64,10 @@ const errorInter = (error) => {
     document
       .getElementById("error-message-2")
       .classList.add("animate__headShake");
-
-  }else if (error == "Ya usted ha registrado su voto"){
+  } else if (error == "Ya usted ha registrado su voto") {
     document.getElementById("normal-message").style.display = "none";
     document.getElementById("error-message").style.display = "none";
     document.getElementById("error-message-2").style.display = "none";
-    
 
     document
       .getElementById("error-message-3")
@@ -84,67 +75,105 @@ const errorInter = (error) => {
     document
       .getElementById("error-message-3")
       .classList.add("animate__headShake");
+  } else {
+    document.getElementById("normal-message").style.display = "none";
+    document.getElementById("error-message-2").style.display = "none";
+    document.getElementById("error-message").style.display = "block";
+    document.getElementById("error-message-3").style.display = "none";
+
+    document.getElementById("error-message").classList.add("animate__animated");
+
+    document
+      .getElementById("error-message")
+      .classList.add("animate__headShake");
   }
 };
 
 $(".next").click(function () {
+  current_fs = $(this).parent().context.className;
+  if (current_fs=="action-button next") {
+    user_email = getEmail()
+  fetchUser(user_email);
+  if (next_bool) {
+    if (animating) return false;
+    animating = true;
+
+    current_fs = $(this).parent();
+    
+    console.log(current_fs)
+    next_fs = $(this).parent().next();
+
+    //activate next step on progressbar using the index of next_fs
+    $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+    //show the next fieldset
+    next_fs.show();
+    //hide the current fieldset with style
+    current_fs.animate(
+      { opacity: 0 },
+      {
+        step: function (now, mx) {
+          //as the opacity of current_fs reduces to 0 - stored in "now"
+          //1. scale current_fs down to 80%
+          scale = 1 - (1 - now) * 0.2;
+          //2. bring next_fs from the right(50%)
+          left = now * 50 + "%";
+          //3. increase opacity of next_fs to 1 as it moves in
+          opacity = 1 - now;
+          current_fs.css({
+            transform: "scale(" + scale + ")",
+            position: "absolute",
+          });
+          next_fs.css({ left: left, opacity: opacity });
+        },
+        duration: 800,
+        complete: function () {
+          current_fs.hide();
+          animating = false;
+        },
+        //this comes from the custom easing plugin
+        easing: "easeInOutBack",
+      }
+    );
+  } else {
+  }
+  }else if (current_fs=="next action-button"){
+    updateUser()
+    
+  }
+
   //hace la llamada a la API para verificar si se encuentra en la base de datos
   //Pero primero la verificacion de que no sea un texto vacío
-
-  fetchUser(getEmail());
-
-  // document.getElementById("email-input").value;
-  // document.getElementById("password-input").value;
-
-  // if (
-  //   document.getElementById("email-input").value == "" ||
-  //   document.getElementById("password-input").value == ""
-  // ) {
-  //   //Activa el mensaje y lo anima
-  //   setMessage();
-  // } 
+  // localStorage.removeItem("key");
+  
+  
 });
-
-const next = () => {
-  if (animating) return false;
-  animating = true;
-
-  current_fs = $(this).parent();
-  next_fs = $(this).parent().next();
-
-  //activate next step on progressbar using the index of next_fs
-  $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-
-  //show the next fieldset
-  next_fs.show();
-  //hide the current fieldset with style
-  current_fs.animate(
-    { opacity: 0 },
-    {
-      step: function (now, mx) {
-        //as the opacity of current_fs reduces to 0 - stored in "now"
-        //1. scale current_fs down to 80%
-        scale = 1 - (1 - now) * 0.2;
-        //2. bring next_fs from the right(50%)
-        left = now * 50 + "%";
-        //3. increase opacity of next_fs to 1 as it moves in
-        opacity = 1 - now;
-        current_fs.css({
-          transform: "scale(" + scale + ")",
-          position: "absolute",
-        });
-        next_fs.css({ left: left, opacity: opacity });
-      },
-      duration: 800,
-      complete: function () {
-        current_fs.hide();
-        animating = false;
-      },
-      //this comes from the custom easing plugin
-      easing: "easeInOutBack",
-    }
-  );
-};
+const updateUser = async () => {
+try {
+    await axios
+    
+      .post("https://api-votaciones.vercel.app/login", { correo, pass })
+      .then(({ data }) => {
+        const { hadRegistered, tokenSession } = data;
+        console.log(hadRegistered, tokenSession);
+        if (hadRegistered===false) {
+          console.log("se registro")
+          next_bool = true;
+        } else {
+          // next_bool = false;
+        }
+      })
+      .catch(({ response }) => {
+        next_bool = false
+        console.log(next_bool)
+        // const error = response.data.message;
+        // errorInter(error)
+        console.log(response);
+      });
+  } catch (error) {
+    console.log(error);
+  }
+}
 $(".previous").click(function () {
   if (animating) return false;
   animating = true;
