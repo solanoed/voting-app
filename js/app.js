@@ -81,48 +81,58 @@ async function getActualVotes() {
 
 //Local functions that call the smart contract function ir oder to vote for each candidate following the same principal of the Previous Moralis functionExecute
 async function votePetro() {
-  let options = {
-    contractAddress: "0xEd7e584717F2aa7fFaaB61A6eb01d8Bf0aB1d3B4",
-    functionName: "vote",
-    abi: [
-      {
-        inputs: [
-          { internalType: "uint256", name: "proposal", type: "uint256" },
+  try{
+    let options = {
+        contractAddress: "0xEd7e584717F2aa7fFaaB61A6eb01d8Bf0aB1d3B4",
+        functionName: "vote",
+        abi: [
+          {
+            inputs: [
+              { internalType: "uint256", name: "proposal", type: "uint256" },
+            ],
+            name: "vote",
+            outputs: [],
+            stateMutability: "nonpayable",
+            type: "function",
+          },
         ],
-        name: "vote",
-        outputs: [],
-        stateMutability: "nonpayable",
-        type: "function",
-      },
-    ],
-    params: {
-      proposal: 0,
-    },
-  };
+        params: {
+          proposal: 0,
+        },
+      };
 
-  await Moralis.executeFunction(options);
+      await Moralis.executeFunction(options);
+  }catch{
+    alert("No esta autorizado para votar");
+  }
+  
 }
 async function voteRodolfo() {
-  let options = {
-    contractAddress: "0xEd7e584717F2aa7fFaaB61A6eb01d8Bf0aB1d3B4",
-    functionName: "vote",
-    abi: [
-      {
-        inputs: [
-          { internalType: "uint256", name: "proposal", type: "uint256" },
+  try{
+    let options = {
+        contractAddress: "0xEd7e584717F2aa7fFaaB61A6eb01d8Bf0aB1d3B4",
+        functionName: "vote",
+        abi: [
+          {
+            inputs: [
+              { internalType: "uint256", name: "proposal", type: "uint256" },
+            ],
+            name: "vote",
+            outputs: [],
+            stateMutability: "nonpayable",
+            type: "function",
+          },
         ],
-        name: "vote",
-        outputs: [],
-        stateMutability: "nonpayable",
-        type: "function",
-      },
-    ],
-    params: {
-      proposal: 1,
-    },
-  };
+        params: {
+          proposal: 1,
+        },
+      };
 
-  await Moralis.executeFunction(options);
+      await Moralis.executeFunction(options);
+  }catch{
+    alert("No esta autorizado para votar");
+  }
+  
 }
 
 //Local Function that allow the chairman to give right to vote to the array of wallets store on the database
@@ -154,19 +164,25 @@ const getCarteras = () => {
 async function rightToVote() {
   //we get the array and assign it to a local variable
   var carteras = getCarteras();
-  //here we will send the array to the blockchain
-  let options = {
-    contractAddress: "0xEd7e584717F2aa7fFaaB61A6eb01d8Bf0aB1d3B4",
-    functionName: "whitelistUsers",
-    abi: [
-      {"inputs":[{"internalType":"address[]","name":"_users","type":"address[]"}],"name":"whitelistUsers","outputs":[],"stateMutability":"nonpayable","type":"function"},
-    ],
-    params: {
-      _users: carteras,
-    },
-  };
 
-  await Moralis.executeFunction(options);
+  try{
+    let options = {
+        contractAddress: "0xEd7e584717F2aa7fFaaB61A6eb01d8Bf0aB1d3B4",
+        functionName: "whitelistUsers",
+        abi: [
+          {"inputs":[{"internalType":"address[]","name":"_users","type":"address[]"}],"name":"whitelistUsers","outputs":[],"stateMutability":"nonpayable","type":"function"},
+        ],
+        params: {
+          _users: carteras,
+        },
+      };
+
+      await Moralis.executeFunction(options);
+  }catch{
+    alert("No esta autorizado para hacer uso de esta función");
+  }
+  //here we will send the array to the blockchain
+  
 }
 
 //Give the onclick function value to ech button
