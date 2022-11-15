@@ -29,7 +29,7 @@
       <!-- progressbar -->
       <ul id="progressbar">
         <li class="active">INGRESA TU CORREO</li>
-        <li>LISTO PARA VOTAR!</li>
+        <li>INGRESA TU HASH</li>
       </ul>
       <!-- fieldsets -->
       <fieldset>
@@ -38,7 +38,12 @@
           Ingresa tus credenciales para verificarlas en nuestra base de Datos
         </h3>
         <h3 class="fs-subtitle error" id="error-message">
-          Correo y Contraseña no encontrados
+          Usuario no encontrado
+        <h3 class="fs-subtitle error" id="error-message-2">
+          Contraseña incorrecta 
+        </h3>
+        <h3 class="fs-subtitle error" id="error-message-3">
+          Ya usted ha registrado su voto
         </h3>
         <input id="email-input" type="text" name="email" placeholder="Email" />
         <input
@@ -50,11 +55,12 @@
         <input
           type="button"
           name="next"
-          class="action-button"
+          class="action-button next"
           value="Next"
         />
         <!-- <input onclick="verifCorreo()" type="button" name="next" class="next action-button" value="Next" /> -->
       </fieldset>
+
       <fieldset>
         <h2 class="fs-title">INGRESA EL CODIGO</h2>
         <h3 class="fs-subtitle">
@@ -74,23 +80,13 @@
           value="Next"
         />
       </fieldset>
-      <fieldset>
-        <h2 class="fs-title">LISTO PARA VOTAR!</h2>
-        <h3 class="fs-subtitle">
-          Estas correctamente Verificado!, a continuacion ingresa mediante el
-          botón para proceder con la votación
-        </h3>
-        <a href="/pages/voting.html">
-          <button type="button" url="/index.html" class="action-button">
-            Siguiente
-          </button>
-        </a>
-      </fieldset>
+
     </form>
     <!-- partial -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script type="module" src="/js/two-step.js"></script>
-    <script type="module"src="../js/verif.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- <script type="module"src="../js/verif.js"></script> -->
   </body>
 </html>

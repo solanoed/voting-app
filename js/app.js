@@ -154,8 +154,6 @@ const getCarteras = () => {
 async function rightToVote() {
   //we get the array and assign it to a local variable
   var carteras = getCarteras();
-  console.log(carteras);
-
   //here we will send the array to the blockchain
   let options = {
     contractAddress: "0xEd7e584717F2aa7fFaaB61A6eb01d8Bf0aB1d3B4",

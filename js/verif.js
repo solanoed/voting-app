@@ -21,14 +21,14 @@ const getEmail = () => {
 export const verifCorreo = () => {
   //hace peticion post con el email y contraseña
 
-  // const Http = new XMLHttpRequest();
-  // const url = "https://jsonplaceholder.typicode.com/posts";
-  // Http.open("POST", url);
-  // Http.send(getEmail());
+  const Http = new XMLHttpRequest();
+  const url = "https://jsonplaceholder.typicode.com/posts";
+  Http.open("POST", url);
+  Http.send(getEmail());
 
-  // Http.onreadystatechange = (e) => {
-  //   console.log(Http.responseText);
-  // };
+  Http.onreadystatechange = (e) => {
+    console.log(Http.responseText);
+  };
 
   if(true){
     console.log("chupapi");
