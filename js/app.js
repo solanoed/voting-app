@@ -36,7 +36,7 @@ async function logOut() {
 
 //object with the variables that will allow us to get the votes for Petro
 const PetroVotes = {
-  contractAddress: "0xEd7e584717F2aa7fFaaB61A6eb01d8Bf0aB1d3B4",
+  contractAddress: "0x32b86c4d397bf581ccdcb24d6696e6e128042efb",
   functionName: "petroVotes",
   abi: [
     {
@@ -51,7 +51,7 @@ const PetroVotes = {
 
 //object with the variables that will allow us to get the votes for Rodolfo
 const RodolfoVotes = {
-  contractAddress: "0xEd7e584717F2aa7fFaaB61A6eb01d8Bf0aB1d3B4",
+  contractAddress: "0x32b86c4d397bf581ccdcb24d6696e6e128042efb",
   functionName: "rodolfoVotes",
   abi: [
     {
@@ -83,7 +83,7 @@ async function getActualVotes() {
 async function votePetro() {
   try{
     let options = {
-        contractAddress: "0xEd7e584717F2aa7fFaaB61A6eb01d8Bf0aB1d3B4",
+        contractAddress: "0x32b86c4d397bf581ccdcb24d6696e6e128042efb",
         functionName: "vote",
         abi: [
           {
@@ -110,7 +110,7 @@ async function votePetro() {
 async function voteRodolfo() {
   try{
     let options = {
-        contractAddress: "0xEd7e584717F2aa7fFaaB61A6eb01d8Bf0aB1d3B4",
+        contractAddress: "0x32b86c4d397bf581ccdcb24d6696e6e128042efb",
         functionName: "vote",
         abi: [
           {
@@ -165,22 +165,26 @@ async function rightToVote() {
   //we get the array and assign it to a local variable
   var carteras = getCarteras();
 
+  console.log(carteras);
+
   try{
     let options = {
-        contractAddress: "0xEd7e584717F2aa7fFaaB61A6eb01d8Bf0aB1d3B4",
-        functionName: "whitelistUsers",
-        abi: [
-          {"inputs":[{"internalType":"address[]","name":"_users","type":"address[]"}],"name":"whitelistUsers","outputs":[],"stateMutability":"nonpayable","type":"function"},
-        ],
-        params: {
-          _users: carteras,
-        },
-      };
+    contractAddress: "0x32b86c4d397bf581ccdcb24d6696e6e128042efb",
+    functionName: "whitelistUsers",
+    abi: [
+      {"inputs":[{"internalType":"address[]","name":"_users","type":"address[]"}],"name":"whitelistUsers","outputs":[],"stateMutability":"nonpayable","type":"function"},
+    ],
+    params: {
+       _users: carteras,
+    },
+    };
 
-      await Moralis.executeFunction(options);
+    await Moralis.executeFunction(options);
   }catch{
-    alert("No esta autorizado para hacer uso de esta función");
+    alert("No esta autorizado para esta funcion");
   }
+    
+ 
   //here we will send the array to the blockchain
   
 }
