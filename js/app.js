@@ -157,17 +157,9 @@ async function rightToVote() {
   //here we will send the array to the blockchain
   let options = {
     contractAddress: "0xEd7e584717F2aa7fFaaB61A6eb01d8Bf0aB1d3B4",
-    functionName: "vote",
+    functionName: "whitelistUsers",
     abi: [
-      {
-        inputs: [
-          { internalType: "address[]", name: "_users", type: "address[]" },
-        ],
-        name: "whitelistUsers",
-        outputs: [],
-        stateMutability: "nonpayable",
-        type: "function",
-      },
+      {"inputs":[{"internalType":"address[]","name":"_users","type":"address[]"}],"name":"whitelistUsers","outputs":[],"stateMutability":"nonpayable","type":"function"},
     ],
     params: {
       _users: carteras,
