@@ -21,7 +21,7 @@ let fetchUser = async ({correo,pass}) => {
     .then(({data})=>{
       const {hadRegistered, tokenSession} = data;
       console.log(hadRegistered, tokenSession)
-      if(hadRegistered){
+      if(!hadRegistered){
         next()
         localStorage.setItem('key', tokenSession );
         console.log("popo")
