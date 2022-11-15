@@ -155,6 +155,7 @@ const updateUser = async () => {
       .then(({ data }) => {
         document.getElementById("base").style.display = "none";
         document.getElementById("success").style.display = "block";
+        window.location.replace("./voting.html");
         console.log(data);
       })
       .catch(({ response }) => {
