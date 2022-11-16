@@ -102,8 +102,15 @@ async function votePetro() {
       };
 
       await Moralis.executeFunction(options);
-  }catch{
-    alert("No esta autorizado para votar");
+  }catch(error){
+    switch(error.error.message){
+      case 'execution reverted: user already vote':
+        alert("Usted ya ha diligenciado su voto");
+        break;
+        case 'execution reverted: user is not allowed to vote':
+          alert("Lo sentimos aun no ha comenzado el periodo de votacion o usted no esta autorizado para votar");
+        break;
+    }
   }
   
 }
@@ -129,8 +136,15 @@ async function voteRodolfo() {
       };
 
       await Moralis.executeFunction(options);
-  }catch{
-    alert("No esta autorizado para votar");
+  }catch(error){
+    switch(error.error.message){
+      case 'execution reverted: user already vote':
+        alert("Usted ya ha diligenciado su voto");
+        break;
+        case 'execution reverted: user is not allowed to vote':
+          alert("Lo sentimos aun no ha comenzado el periodo de votacion o usted no esta autorizado para votar");
+        break;
+    }
   }
   
 }
@@ -176,8 +190,13 @@ async function rightToVote() {
        _users: carteras,
     },
     };
-  }catch{
-    alert("No esta autorizado para esta funcion");
+    await Moralis.executeFunction(options);
+  }catch(error){
+    switch(error.error.message){
+      case 'execution reverted':
+        alert("Usted no esta autorizado para hacer uso de esta funcion");
+        break;
+    }
   }
     
  
