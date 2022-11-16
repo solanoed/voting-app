@@ -64,11 +64,43 @@ const RodolfoVotes = {
   ],
 };
 
+const animateNumbers = ( vp,vr ) =>{
+  document.getElementById("vp").setAttribute("akhi", vp.toString());
+  document.getElementById("vr").setAttribute("akhi", vr.toString());
+  console.log("Clases Añadidas")
+
+  const counters = document.querySelectorAll(".value");
+  const speed = 200;
+
+  counters.forEach((counter) => {
+    const animate = () => {
+      const value = +counter.getAttribute("akhi");
+      const data = +counter.innerText;
+
+      const time = value / speed;
+      if (data < value) {
+        counter.innerText = Math.ceil(data + time);
+        setTimeout(animate, 1);
+      } else {
+        counter.innerText = value;
+      }
+    };
+
+    animate();
+  });
+}
+
 //function that using a Moralis function giving of parameter the Objects we create beforehand call the function that allow us to get the Votes for each Candidate
 async function getActualVotes() {
   //fucntions that get the value in the smart contract and we assign them to local variables
-  const cantVotesPetro = await Moralis.executeFunction(PetroVotes);
-  const cantVotesRodolfo = await Moralis.executeFunction(RodolfoVotes);
+  // const cantVotesPetro = await Moralis.executeFunction(PetroVotes);
+  // const cantVotesRodolfo = await Moralis.executeFunction(RodolfoVotes);
+  const cantVotesPetro = 200;
+  const cantVotesRodolfo = 400;
+
+  animateNumbers(cantVotesPetro,cantVotesRodolfo)
+  
+
 
   //we create variables that get the wuery information that will show the votes for each candidate
   //let votesPetro = document.querySelector('.votes-number-trump');
@@ -79,74 +111,77 @@ async function getActualVotes() {
   //votesRodolfo.innerHTML = parseInt(cantVotesRodolfo._hex,16);
 }
 
+
 //Local functions that call the smart contract function ir oder to vote for each candidate following the same principal of the Previous Moralis functionExecute
 async function votePetro() {
-  try{
+  try {
     let options = {
-        contractAddress: "0x32b86c4d397bf581ccdcb24d6696e6e128042efb",
-        functionName: "vote",
-        abi: [
-          {
-            inputs: [
-              { internalType: "uint256", name: "proposal", type: "uint256" },
-            ],
-            name: "vote",
-            outputs: [],
-            stateMutability: "nonpayable",
-            type: "function",
-          },
-        ],
-        params: {
-          proposal: 0,
+      contractAddress: "0x32b86c4d397bf581ccdcb24d6696e6e128042efb",
+      functionName: "vote",
+      abi: [
+        {
+          inputs: [
+            { internalType: "uint256", name: "proposal", type: "uint256" },
+          ],
+          name: "vote",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
         },
-      };
+      ],
+      params: {
+        proposal: 0,
+      },
+    };
 
-      await Moralis.executeFunction(options);
-  }catch(error){
-    switch(error.error.message){
-      case 'execution reverted: user already vote':
+    await Moralis.executeFunction(options);
+  } catch (error) {
+    switch (error.error.message) {
+      case "execution reverted: user already vote":
         alert("Usted ya ha diligenciado su voto");
         break;
-        case 'execution reverted: user is not allowed to vote':
-          alert("Lo sentimos aun no ha comenzado el periodo de votacion o usted no esta autorizado para votar");
+      case "execution reverted: user is not allowed to vote":
+        alert(
+          "Lo sentimos aun no ha comenzado el periodo de votacion o usted no esta autorizado para votar"
+        );
         break;
     }
   }
-  
 }
 async function voteRodolfo() {
-  try{
+  try {
     let options = {
-        contractAddress: "0x32b86c4d397bf581ccdcb24d6696e6e128042efb",
-        functionName: "vote",
-        abi: [
-          {
-            inputs: [
-              { internalType: "uint256", name: "proposal", type: "uint256" },
-            ],
-            name: "vote",
-            outputs: [],
-            stateMutability: "nonpayable",
-            type: "function",
-          },
-        ],
-        params: {
-          proposal: 1,
+      contractAddress: "0x32b86c4d397bf581ccdcb24d6696e6e128042efb",
+      functionName: "vote",
+      abi: [
+        {
+          inputs: [
+            { internalType: "uint256", name: "proposal", type: "uint256" },
+          ],
+          name: "vote",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
         },
-      };
+      ],
+      params: {
+        proposal: 1,
+      },
+    };
 
-      await Moralis.executeFunction(options);
-  }catch(error){
-    switch(error.error.message){
-      case 'execution reverted: user already vote':
+    await Moralis.executeFunction(options);
+  } catch (error) {
+    switch (error.error.message) {
+      case "execution reverted: user already vote":
         alert("Usted ya ha diligenciado su voto");
         break;
-        case 'execution reverted: user is not allowed to vote':
-          alert("Lo sentimos aun no ha comenzado el periodo de votacion o usted no esta autorizado para votar");
+      case "execution reverted: user is not allowed to vote":
+        alert(
+          "Lo sentimos aun no ha comenzado el periodo de votacion o usted no esta autorizado para votar"
+        );
         break;
     }
   }
-  
 }
 
 //Local Function that allow the chairman to give right to vote to the array of wallets store on the database
@@ -156,9 +191,9 @@ async function charge() {
   await logOut();
   await login();
 }
+setInterval(getActualVotes, 1000);
 
 //set interval in order to refresh the votecount from the smartcontract everysecond
-setInterval(getActualVotes, 1000);
 
 const getCarteras = async () => {
   var hashes = [];
@@ -172,40 +207,46 @@ const getCarteras = async () => {
     })
     .catch((err) => console.log(err));
 
-    
   return hashes;
 };
 
 var carteras = getCarteras();
+
 async function rightToVote() {
   //we get the array and assign it to a local variable
 
-  try{
+  try {
     let options = {
-    contractAddress: "0x32b86c4d397bf581ccdcb24d6696e6e128042efb",
-    functionName: "whitelistUsers",
-    abi: [
-      {"inputs":[{"internalType":"address[]","name":"_users","type":"address[]"}],"name":"whitelistUsers","outputs":[],"stateMutability":"nonpayable","type":"function"},
-    ],
-    params: {
-       _users: carteras,
-    },
+      contractAddress: "0x32b86c4d397bf581ccdcb24d6696e6e128042efb",
+      functionName: "whitelistUsers",
+      abi: [
+        {
+          inputs: [
+            { internalType: "address[]", name: "_users", type: "address[]" },
+          ],
+          name: "whitelistUsers",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+      ],
+      params: {
+        _users: carteras,
+      },
     };
     await Moralis.executeFunction(options);
-  }catch(error){
-    switch(error.error.message){
-      case 'execution reverted':
+  } catch (error) {
+    switch (error.error.message) {
+      case "execution reverted":
         alert("Usted no esta autorizado para hacer uso de esta funcion");
         break;
     }
   }
-    
- 
+
   //here we will send the array to the blockchain
-  
 }
 
 //Give the onclick function value to ech button
 document.getElementById("btn-petro").onclick = votePetro;
 document.getElementById("btn-rodolfo").onclick = voteRodolfo;
-document.getElementById("btn-AllowToVote").onclick = rightToVote;
+// document.getElementById("btn-AllowToVote").onclick = rightToVote;
