@@ -161,11 +161,9 @@ const getCarteras = () => {
   return hashes;
 };
 
+var carteras = getCarteras();
 async function rightToVote() {
   //we get the array and assign it to a local variable
-  var carteras = getCarteras();
-
-  console.log(carteras);
 
   try{
     let options = {
@@ -178,8 +176,6 @@ async function rightToVote() {
        _users: carteras,
     },
     };
-
-    await Moralis.executeFunction(options);
   }catch{
     alert("No esta autorizado para esta funcion");
   }
