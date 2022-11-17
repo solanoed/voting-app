@@ -14,34 +14,44 @@ const getEmail = () => {
 };
 
 let fetchUser = async ({ correo, pass }) => {
-  try {
-    await axios
+  // try {
+  //   await axios
 
-      .post("https://api-votaciones.vercel.app/login", { correo, pass })
-      .then(({ data }) => {
-        const { hadRegistered, tokenSession } = data;
-        console.log(hadRegistered, tokenSession);
-        if (hadRegistered === false) {
-          bool = true;
-          console.log("Valor de booll "+bool);
-        } else {
-          console.log("Usuario ya existe");
-        }
-      })
-      .catch(({ response }) => {
-        bool = false;
-        const error = response.data.message;
-        errorInter(error);
-      });
+  //     .post("https://api-votaciones.vercel.app/login", { correo, pass })
+  //     .then(({ data }) => {
+  //       const { hadRegistered, tokenSession } = data;
+  //       console.log(hadRegistered, tokenSession);
+  //       if (hadRegistered === false) {
+  //         bool = true;
+  //         console.log("Valor de booll "+bool);
+  //       } else {
+  //         console.log("Usuario ya existe");
+  //       }
+  //     })
+  //     .catch(({ response }) => {
+  //       bool = false;
+  //       const error = response.data.message;
+  //       errorInter(error);
+  //     });
+  // } catch (error) {
+  //   console.log(error);
+  // }
+  try {
+    const resp = await axios.post("https://api-votaciones.vercel.app/login", { correo, pass })
+    console.log(resp.data)
+      const  { hadRegistered, tokenSession } = resp.data;
   } catch (error) {
-    console.log(error);
+    console.log(JSON.parse(error.request.response).message)
   }
+  bool = true;
+  console.log(bool)
 };
 
 $(".next").click(function () {
   console.log("Click antes "+bool)
   user_email = getEmail();
-  fetchUser(user_email);
+  console.log(fetchUser(user_email));
+
   console.log("Click Despues "+bool)
   if (bool) {
     if (animating) return false;
@@ -49,8 +59,10 @@ $(".next").click(function () {
 
     current_fs = $(this).parent();
 
-    console.log(current_fs);
+    console.log($(this));
+    // console.log($(this).parent());
     next_fs = $(this).parent().next();
+    // console.log(next_fs);
 
     //activate next step on progressbar using the index of next_fs
     $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
