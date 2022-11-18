@@ -12,59 +12,78 @@
     />
     <link rel="stylesheet" href="/styles/voting.css" />
     <link rel="stylesheet" href="/styles/voting-media-queries.css" />
-    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico"/>
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
 
     <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
     <script src="https://unpkg.com/moralis-v1/dist/moralis.js"></script>
   </head>
 
   <body onload="charge()">
-    
-      <div class="app-overlay"></div>
+    <div class="app-overlay"></div>
 
-      <header>
-        <div class="logo">
-          <a href="/index.html">
-            <img src="/assets/colombita.png" />
-          </a>
-          <h1>VOTACION ELECCIONES COLOMBIA 2022</h1>
-        </div>
-      </header>
+    <header>
+      <div class="logo">
+        <a href="/index.html">
+          <img src="/assets/colombita.png" />
+        </a>
+        <h1>VOTACION ELECCIONES COLOMBIA 2022</h1>
+        <button
+          class="btn-votar sustraer"
+          id="btn-sustraer"
+        >
+        ⬇
+        </button>
+      </div>
+    </header>
 
-      <main>
-        <div class="cards">
-          <div class="card">
-            <img class="card-image" src="/assets/petrico.png" />
-            <div class="card-info">
-              <div class="candidate-info">
-                <span class="candidate-name">GUSTAVO PETRO</span>
-
-                <img
-                  class="logopacto"
-                  src="/assets/pacto_logo.png"
-                  alt="Logo Pacto Histórico"
-                />
-              </div>
+    <main>
+      <div class="cards">
+        <div class="card">
+          <img class="card-image" src="/assets/petrico.png" />
+          <div class="card-info">
+            <div class="candidate-votes">
+              <span class="votes-number-petro value" id="vp">0</span>
+              <span class="votes-text">VOTOS</span>
             </div>
-            <button class="card-btn btn-petro" id="btn-petro" onclick="">VOTAR</button>
-          </div>
-          <div class="card">
-            <img class="card-image" src="/assets/rodolfo.png" />
-            <div class="card-info">
-              <div class="candidate-info">
-                <span class="candidate-name">RODOLFO HERNANDEZ</span>
-                <img
-                  class="logopacto"
-                  src="/assets/liga_logo.png"
-                  alt="Logo Liga de Gobernantes"
-                />
-              </div>
+            <div class="line"></div>
+            <div class="candidate-info">
+              <span class="candidate-name">GUSTAVO PETRO</span>
+
+              <img
+                class="logopacto"
+                src="/assets/pacto_logo.png"
+                alt="Logo Pacto Histórico"
+              />
             </div>
-            <button class="card-btn btn-rodolfo" id="btn-rodolfo" onclick="">VOTAR</button>
           </div>
+          <button class="card-btn btn-petro" id="btn-petro" onclick="">
+            VOTAR
+          </button>
         </div>
-      </main>
-    
+        <div class="card">
+          <img class="card-image" src="/assets/rodolfo.png" />
+          <div class="card-info">
+            <div class="candidate-votes">
+              <span class="votes-number-rodolfo value" id="vr">0</span>
+              <span class="votes-text">VOTOS</span>
+            </div>
+            <div class="line"></div>
+            <div class="candidate-info">
+              <span class="candidate-name">RODOLFO HNDZ</span>
+              <img
+                class="logopacto"
+                src="/assets/liga_logo.png"
+                alt="Logo Liga de Gobernantes"
+              />
+            </div>
+          </div>
+          <button class="card-btn btn-rodolfo" id="btn-rodolfo" onclick="">
+            VOTAR
+          </button>
+        </div>
+      </div>
+    </main>
+
     <script src="/js/app.js"></script>
   </body>
 </html>
