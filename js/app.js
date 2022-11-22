@@ -3,29 +3,32 @@ const serverUrl = "https://server-woad-six.vercel.app/";
 const appId = 001;
 //Moralis fucntion to connect with our Moralis App
 Moralis.start({ serverUrl, appId });
-
+let actualUser;
 
 //Function that allow us to connect to our web3 Provider , in the case of the project Metamask
 async function handleAuth(provider) {
-  // Enable web3 to get user address and chain
-  await Moralis.enableWeb3({ throwOnError: true, provider });
-
+  const ethersProvider = await Moralis.enableWeb3({
+    throwOnError: true,
+    provider
+  });
+  const signer = ethersProvider.getSigner();
+  const account = await signer.getAddress();
+  const chainId = Moralis.chainId;
+  actualUser = account;
+  console.log(account);
   if (!account) {
     throw new Error('Connecting to chain failed, as no connected account was found');
   }
   if (!chainId) {
     throw new Error('Connecting to chain failed, as no connected chain was found');
   }
-  
-  // Get message to sign from the auth api
+
   const { message } = await Moralis.Cloud.run('requestMessage', {
     address: account,
     chain: parseInt(chainId, 16),
     network: 'evm',
   });
-
   
-  // Authenticate and login via parse
   await authenticate({
     signingMessage: message,
     throwOnError: true,
@@ -183,7 +186,6 @@ async function voteRodolfo() {
 async function charge() {
   await logOut();
   handleAuth('metamask');
-
   setInterval(getActualVotes, 1000);
 }
 
@@ -209,6 +211,7 @@ var carteras = getCarteras();
 async function rightToVote() {
   //we get the array and assign it to a local variable
 console.log(carteras);
+console.log(actualUser);
   try {
     let options = {
       contractAddress: "0x32b86c4d397bf581ccdcb24d6696e6e128042efb",

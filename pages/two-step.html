@@ -13,6 +13,17 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles/voting.css" />
+    <link rel="stylesheet" href="/styles/voting-media-queries.css" />
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="https://unpkg.com/moralis-v1/dist/moralis.js"></script>
   </head>
   <body >
     <!-- partial:index.partial.html -->
@@ -24,6 +35,12 @@
         </a>
         <h1>VERIFICACION ELECCIONES COLOMBIA 2022</h1>
       </div>
+      <button
+          class="btn-votar sustraer"
+          id="btn-iniciar"
+        >
+        Iniciar
+        </button>
     </header>
     <form id="msform">
       <!-- progressbar -->

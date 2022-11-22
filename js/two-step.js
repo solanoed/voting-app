@@ -1,3 +1,44 @@
+// we inicialized this variable sin order to be able to acces to Our Moralis Project
+const serverUrl = "https://server-woad-six.vercel.app/";
+const appId = parseInt("001",8);
+//Moralis fucntion to connect with our Moralis App
+Moralis.start({ serverUrl, appId });
+let actualUser;
+
+//Function that allow us to connect to our web3 Provider , in the case of the project Metamask
+async function handleAuth(provider) {
+  const ethersProvider = await Moralis.enableWeb3({
+    throwOnError: true,
+    provider
+  });
+  const signer = ethersProvider.getSigner();
+  const account = await signer.getAddress();
+  const chainId = Moralis.chainId;
+  actualUser = account;
+  console.log(account);
+  if (!account) {
+    throw new Error('Connecting to chain failed, as no connected account was found');
+  }
+  if (!chainId) {
+    throw new Error('Connecting to chain failed, as no connected chain was found');
+  }
+
+  const { message } = await Moralis.Cloud.run('requestMessage', {
+    address: account,
+    chain: parseInt(chainId, 16),
+    network: 'evm',
+  });
+  
+  await authenticate({
+    signingMessage: message,
+    throwOnError: true,
+  });
+}
+
+async function charge() {
+  handleAuth('metamask');
+}
+
 //jQuery time
 var current_fs, next_fs, previous_fs; //fieldsets
 var left, opacity, scale; //fieldset properties which we will animate
@@ -24,7 +65,7 @@ let fetchUser = async ({ correo, pass }) => {
       pass,
     });
     const {hadRegistered} = resp.data
-    if(!hadRegistered){
+    if(hadRegistered){
       errorInter("Ya usted ha registrado su voto")
     }else{
       resetMessages();
@@ -201,3 +242,5 @@ function resetMessages() {
   document.getElementById("error-message-3").style.display = "none";
   document.getElementById("error-message").style.display = "none";
 }
+
+document.getElementById("btn-iniciar").onclick = charge;
