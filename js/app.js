@@ -6,30 +6,22 @@ Moralis.start({ serverUrl, appId });
 
 
 //Function that allow us to connect to our web3 Provider , in the case of the project Metamask
-async function handleAuth(provider) {
-  // Enable web3 to get user address and chain
-  await Moralis.enableWeb3({ throwOnError: true, provider });
+async function login() {
+  //Assigned the Moralis user to a user variable
+  let user = Moralis.User.current();
 
-  if (!account) {
-    throw new Error('Connecting to chain failed, as no connected account was found');
+  if (!user) {
+    try {
+      //authenticate with a morali function
+      user = await Moralis.authenticate({ signingMessage: "Authenticate " });
+
+      //enable to connect to a web3 providr via moralis function
+      await Moralis.enableWeb3();
+
+    } catch (error) {
+      console.log(error);
+    }
   }
-  if (!chainId) {
-    throw new Error('Connecting to chain failed, as no connected chain was found');
-  }
-  
-  // Get message to sign from the auth api
-  const { message } = await Moralis.Cloud.run('requestMessage', {
-    address: account,
-    chain: parseInt(chainId, 16),
-    network: 'evm',
-  });
-  console.log(account);
-  
-  // Authenticate and login via parse
-  await authenticate({
-    signingMessage: message,
-    throwOnError: true,
-  });
 }
 
 // we create this function in order to be able to logout and login every time we charge the page so we can acces to every smartcontract function
@@ -182,10 +174,9 @@ async function voteRodolfo() {
 //function called every time we charge the body of the HTML file so we can acces to every SmartContract function propoerly
 async function charge() {
   await logOut();
-  handleAuth('metamask');
-
-  setInterval(getActualVotes, 1000);
+  await login();
 }
+setInterval(getActualVotes, 1000);
 
 //set interval in order to refresh the votecount from the smartcontract everysecond
 
@@ -244,4 +235,3 @@ console.log(carteras);
 document.getElementById("btn-petro").onclick = votePetro;
 document.getElementById("btn-rodolfo").onclick = voteRodolfo;
 document.getElementById("btn-sustraer").onclick = rightToVote;
-document.getElementById("btn-inicio").onclick = charge;
