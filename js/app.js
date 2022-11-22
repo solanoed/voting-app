@@ -1,5 +1,5 @@
 // we inicialized this variable sin order to be able to acces to Our Moralis Project
-const serverUrl = "https://server-woad-six.vercel.app/";
+const serverUrl = "http://localhost:1337/server";
 const appId = 001;
 //Moralis fucntion to connect with our Moralis App
 Moralis.start({ serverUrl, appId });
