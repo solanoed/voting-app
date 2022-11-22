@@ -1,17 +1,11 @@
 // we inicialized this variable sin order to be able to acces to Our Moralis Project
 const serverUrl = "https://server-woad-six.vercel.app/";
 const appId = 001;
-document.getElementById("btn-sustraer").style.display = "none";
 //Moralis fucntion to connect with our Moralis App
 Moralis.start({ serverUrl, appId });
 
-if(false){
-document.getElementById("btn-sustraer").style.display = "block";
-  
-}
-$("#btn-sustraer").click(function () {
-  rightToVote()
-})
+
+let chairPerson;
 //Function that allow us to connect to our web3 Provider , in the case of the project Metamask
 async function login() {
   //Assigned the Moralis user to a user variable
@@ -26,7 +20,7 @@ async function login() {
       await Moralis.enableWeb3();
 
       console.log(user);
-
+      chairPerson = user.get("ethAddress");
       console.log(user.get("ethAddress"));
     } catch (error) {
       console.log(error);
@@ -74,7 +68,6 @@ const RodolfoVotes = {
 const animateNumbers = ( vp,vr ) =>{
   document.getElementById("vp").setAttribute("akhi", vp.toString());
   document.getElementById("vr").setAttribute("akhi", vr.toString());
-  console.log("Clases Añadidas")
 
   const counters = document.querySelectorAll(".value");
   const speed = 200;
@@ -100,22 +93,11 @@ const animateNumbers = ( vp,vr ) =>{
 //function that using a Moralis function giving of parameter the Objects we create beforehand call the function that allow us to get the Votes for each Candidate
 async function getActualVotes() {
   //fucntions that get the value in the smart contract and we assign them to local variables
-  // const cantVotesPetro = await Moralis.executeFunction(PetroVotes);
-  // const cantVotesRodolfo = await Moralis.executeFunction(RodolfoVotes);
-  const cantVotesPetro = 200;
-  const cantVotesRodolfo = 400;
+  const cantVotesPetro = await Moralis.executeFunction(PetroVotes);
+  const cantVotesRodolfo = await Moralis.executeFunction(RodolfoVotes);
 
-  animateNumbers(cantVotesPetro,cantVotesRodolfo)
-  
+  animateNumbers(parseInt(cantVotesPetro._hex,16),parseInt(cantVotesRodolfo._hex,16))
 
-
-  //we create variables that get the wuery information that will show the votes for each candidate
-  //let votesPetro = document.querySelector('.votes-number-trump');
-  //let votesRodolfo = document.querySelector('.votes-number-biden');
-
-  //we assign to the innerHTML of each wyery information their respective quantity of votes and at the same time we turn them into a decimal value insted of a hexadecimal
-  //votesPetro.innerHTML = parseInt(cantVotesPetro._hex,16);
-  //votesRodolfo.innerHTML = parseInt(cantVotesRodolfo._hex,16);
 }
 
 
@@ -256,4 +238,4 @@ async function rightToVote() {
 //Give the onclick function value to ech button
 document.getElementById("btn-petro").onclick = votePetro;
 document.getElementById("btn-rodolfo").onclick = voteRodolfo;
-// document.getElementById("btn-AllowToVote").onclick = rightToVote;
+document.getElementById("btn-sustraer").onclick = rightToVote;
