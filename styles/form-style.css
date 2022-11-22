@@ -62,6 +62,10 @@ body {
   color:greenyellow;
   display:none;
 }
+.fs-subtitle.not-success{
+  color:red;
+  display:none;
+}
 /*buttons*/
 #msform .action-button {
 	width: 100px;

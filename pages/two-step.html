@@ -35,18 +35,13 @@
         </a>
         <h1>VERIFICACION ELECCIONES COLOMBIA 2022</h1>
       </div>
-      <button
-          class="btn-votar sustraer"
-          id="btn-iniciar"
-        >
-        Iniciar
-        </button>
+
     </header>
     <form id="msform">
       <!-- progressbar -->
       <ul id="progressbar">
         <li class="active">INGRESA TU CORREO</li>
-        <li>INGRESA TU HASH</li>
+        <li>CARGA TU CARTERA</li>
       </ul>
       <!-- fieldsets -->
       <fieldset>
@@ -79,14 +74,17 @@
       </fieldset>
 
       <fieldset>
-        <h2 class="fs-title">INGRESA TU CODIGO HASH</h2>
+        <h2 class="fs-title">VERIFICA TU CODIGO HASH</h2>
         <h3 class="fs-subtitle" id="base">
-          Ingresa la direccion a tu wallet de Metamask
+          Carga tu cartera
         </h3>
         <h3 class="fs-subtitle success" id="success">
-          Cartera Creada Exitosamente
+          Cartera Cargada Exitosamente
         </h3>
-        <input type="text" id="hash" name="hash-dir" placeholder="Hash" />
+        <h3 class="fs-subtitle not-success" id="not-success">
+          Verifique Tenga Metamask y que se encuentre en la red Goerly
+        </h3>
+        <input type="text" id="hash" name="hash-dir" placeholder="Hash" disabled/>
         <input
           type="button"
           name="previous"
@@ -97,10 +95,9 @@
           type="button"
           name="next"
           class="action-button hash"
-          value="Next"
-          href="./voting.html"
+          value="Cargar"
         />
-      </fieldset>
+        
 
     </form>
     <!-- partial -->

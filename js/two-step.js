@@ -1,42 +1,49 @@
 // we inicialized this variable sin order to be able to acces to Our Moralis Project
 const serverUrl = "https://server-woad-six.vercel.app/";
-const appId = parseInt("001",8);
+const appId = parseInt("001", 8);
 //Moralis fucntion to connect with our Moralis App
 Moralis.start({ serverUrl, appId });
-let actualUser;
+let actualUser = "none";
 
 //Function that allow us to connect to our web3 Provider , in the case of the project Metamask
 async function handleAuth(provider) {
   const ethersProvider = await Moralis.enableWeb3({
     throwOnError: true,
-    provider
+    provider,
   });
   const signer = ethersProvider.getSigner();
   const account = await signer.getAddress();
   const chainId = Moralis.chainId;
   actualUser = account;
-  console.log(account);
+
+  document.getElementById("hash").setAttribute("placeholder", actualUser);
+  document.getElementById("base").style.display = "none";
+  document.getElementById("success").style.display = "block";
+
+  console.log(actualUser);
   if (!account) {
-    throw new Error('Connecting to chain failed, as no connected account was found');
+    throw new Error(
+      "Connecting to chain failed, as no connected account was found"
+    );
   }
   if (!chainId) {
-    throw new Error('Connecting to chain failed, as no connected chain was found');
+    throw new Error(
+      "Connecting to chain failed, as no connected chain was found"
+    );
   }
 
-  const { message } = await Moralis.Cloud.run('requestMessage', {
+  const { message } = await Moralis.Cloud.run("requestMessage", {
     address: account,
     chain: parseInt(chainId, 16),
-    network: 'evm',
+    network: "evm",
   });
-  
+
   await authenticate({
     signingMessage: message,
     throwOnError: true,
   });
-}
 
-async function charge() {
-  handleAuth('metamask');
+  
 }
 
 //jQuery time
@@ -64,15 +71,16 @@ let fetchUser = async ({ correo, pass }) => {
       correo,
       pass,
     });
-    const {hadRegistered} = resp.data
-    if(hadRegistered){
-      errorInter("Ya usted ha registrado su voto")
-    }else{
+    const { hadRegistered } = resp.data;
+    // hadRegistered
+    if (hadRegistered) {
+      errorInter("Ya usted ha registrado su voto");
+    } else {
       resetMessages();
       console.log(resp.data);
       nextForm();
     }
-    console.log(hadRegistered)
+    console.log(hadRegistered);
   } catch (error) {
     errorInter(JSON.parse(error.request.response).message);
   }
@@ -126,7 +134,7 @@ $(".next").click(function () {
 });
 
 $(".hash").click(function () {
-  sendAndUpdate()
+  sendAndUpdate();
 });
 
 const createCartera = async () => {
@@ -134,34 +142,41 @@ const createCartera = async () => {
     const resp = await axios.post(
       "https://api-votaciones.vercel.app/crearcartera",
       {
-        hash: document.getElementById("hash").value,
+        hash: document.getElementById("hash").placeholder
       }
     );
-
-    document.getElementById("base").style.display = "none";
-    document.getElementById("success").style.display = "block";
-    window.location.replace("../index.html");
+      console.log(resp.data)
+      setTimeout(() => {
+        window.location.replace("../index.html");
+      }, "5000")
   } catch (error) {
-    console.log(error);
+    console.log("create cartera: "+ error);
   }
 };
-const  sendAndUpdate  =  async ()  => {
-  
-  await updateUser()
-  await createCartera()
-  
-}
+const sendAndUpdate = async () => {
+  try {
+    handleAuth("metamask");
+    await createCartera()
+    await updateUser()
+    
+  } catch (error) {
+
+    // console.log("send and update: "+ error)
+    // errorInter("hash");
+    document.getElementById("hash").setAttribute("placeholder", "Cartera no encontrada");
+  }
+};
 const updateUser = async () => {
   try {
     const resp = await axios.patch(
       "https://api-votaciones.vercel.app/updateUser",
       {
-        correo: getEmail().correo
+        correo: getEmail().correo,
       }
     );
-      console.log(resp.data)
+    console.log(resp.data);
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 };
 
@@ -220,6 +235,9 @@ const errorInter = (error = "No") => {
   } else if (error == "Ya usted ha registrado su voto") {
     deact("none", "none", "none", "block");
     message("error-message-3");
+  } else if (error == "hash") {
+    document.getElementById("base").style.display = "none";
+    document.getElementById("not-success").style.display = "block";
   } else {
     deact("none", "block", "none", "none");
     message("error-message");
