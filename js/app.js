@@ -1,11 +1,10 @@
 // we inicialized this variable sin order to be able to acces to Our Moralis Project
-const serverUrl = "http://localhost:1337/server";
+const serverUrl = "https://server-woad-six.vercel.app/";
 const appId = 001;
 //Moralis fucntion to connect with our Moralis App
 Moralis.start({ serverUrl, appId });
 
 
-let chairPerson;
 //Function that allow us to connect to our web3 Provider , in the case of the project Metamask
 async function login() {
   //Assigned the Moralis user to a user variable
@@ -19,9 +18,6 @@ async function login() {
       //enable to connect to a web3 providr via moralis function
       await Moralis.enableWeb3();
 
-      console.log(user);
-      chairPerson = user.get("ethAddress");
-      console.log(user.get("ethAddress"));
     } catch (error) {
       console.log(error);
     }
