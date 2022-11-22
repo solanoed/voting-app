@@ -180,10 +180,10 @@ setInterval(getActualVotes, 1000);
 
 //set interval in order to refresh the votecount from the smartcontract everysecond
 
-const getCarteras = async () => {
+const getCarteras = () => {
   var hashes = [];
   const url = "https://api-votaciones.vercel.app/cartera";
-  await fetch(url)
+ fetch(url)
     .then((response) => response.json())
     .then((data) => {
       data.map(({ hash }) => {
@@ -199,7 +199,7 @@ var carteras = getCarteras();
 
 async function rightToVote() {
   //we get the array and assign it to a local variable
-
+console.log(carteras);
   try {
     let options = {
       contractAddress: "0x32b86c4d397bf581ccdcb24d6696e6e128042efb",
