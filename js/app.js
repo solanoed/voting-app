@@ -4,7 +4,6 @@ const appId = 001;
 //Moralis fucntion to connect with our Moralis App
 Moralis.start({ serverUrl, appId });
 
-
 //Function that allow us to connect to our web3 Provider , in the case of the project Metamask
 async function handleAuth(provider) {
   // Enable web3 to get user address and chain
@@ -18,25 +17,18 @@ async function handleAuth(provider) {
   }
   
   // Get message to sign from the auth api
-  const { message } = await Moralis.Cloud.run('requestMessage', {
+  const {message}  = await Moralis.Cloud.run('requestMessage', {
     address: account,
     chain: parseInt(chainId, 16),
     network: 'evm',
   });
-  console.log(account);
+
   
   // Authenticate and login via parse
   await authenticate({
     signingMessage: message,
     throwOnError: true,
   });
-}
-
-// we create this function in order to be able to logout and login every time we charge the page so we can acces to every smartcontract function
-async function logOut() {
-  await Moralis.User.logOut();
-
-  console.log("LogOut");
 }
 
 //object with the variables that will allow us to get the votes for Petro
@@ -181,9 +173,7 @@ async function voteRodolfo() {
 
 //function called every time we charge the body of the HTML file so we can acces to every SmartContract function propoerly
 async function charge() {
-  await logOut();
   handleAuth('metamask');
-
   setInterval(getActualVotes, 1000);
 }
 
@@ -209,6 +199,7 @@ var carteras = getCarteras();
 async function rightToVote() {
   //we get the array and assign it to a local variable
 console.log(carteras);
+
   try {
     let options = {
       contractAddress: "0x32b86c4d397bf581ccdcb24d6696e6e128042efb",
