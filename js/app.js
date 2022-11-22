@@ -23,7 +23,7 @@ async function handleAuth(provider) {
     chain: parseInt(chainId, 16),
     network: 'evm',
   });
-  console.log(account);
+
   
   // Authenticate and login via parse
   await authenticate({
