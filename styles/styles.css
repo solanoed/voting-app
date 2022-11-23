@@ -111,6 +111,16 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+/* li.b1.animate__animated.animate__fadeIn{
+  --animate-delay: 5s;
+}
+li.b2.animate__animated.animate__fadeIn{
+  --animate-delay: 8s;
+}
+li.b3.animate__animated.animate__fadeIn{
+  --animate-delay: 11s;
+} */
+
 .b1, .b2,.b3{
   font-weight: 600;
 }
