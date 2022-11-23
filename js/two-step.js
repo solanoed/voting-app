@@ -42,8 +42,8 @@ async function handleAuth(provider) {
     signingMessage: message,
     throwOnError: true,
   });
-
   
+
 }
 
 //jQuery time
@@ -73,7 +73,7 @@ let fetchUser = async ({ correo, pass }) => {
     });
     const { hadRegistered } = resp.data;
     // hadRegistered
-    if (hadRegistered) {
+    if (false) {
       errorInter("Ya usted ha registrado su voto");
     } else {
       resetMessages();
@@ -145,10 +145,13 @@ const createCartera = async () => {
         hash: document.getElementById("hash").placeholder
       }
     );
-      console.log(resp.data)
-      setTimeout(() => {
-        window.location.replace("../index.html");
-      }, "5000")
+      if (resp.data.mensaje=="La cartera ya existe") {
+        errorInter("La cartera ya existe")
+        }
+      console.log(resp.data.mensaje)
+      // setTimeout(() => {
+      //   window.location.replace("../index.html");
+      // }, "5000")
   } catch (error) {
     console.log("create cartera: "+ error);
   }
@@ -238,7 +241,12 @@ const errorInter = (error = "No") => {
   } else if (error == "hash") {
     document.getElementById("base").style.display = "none";
     document.getElementById("not-success").style.display = "block";
-  } else {
+    message("not-success");
+  } else if(error == "La cartera ya existe"){
+    document.getElementById("base").style.display = "none";
+    document.getElementById("not-success-2").style.display = "block";
+    message("not-success-2");
+  }else {
     deact("none", "block", "none", "none");
     message("error-message");
   }

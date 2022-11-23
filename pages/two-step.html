@@ -18,7 +18,8 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/styles/voting.css" />
+    <!-- <link rel="stylesheet" href="/styles/voting.css" /> -->
+    <!-- <link rel="stylesheet" href="/styles/form-style.css" /> -->
     <link rel="stylesheet" href="/styles/voting-media-queries.css" />
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
 
@@ -39,65 +40,71 @@
     </header>
     <form id="msform">
       <!-- progressbar -->
-      <ul id="progressbar">
+      <ul id="progressbar" class="animate__animated animate__fadeIn">
         <li class="active">INGRESA TU CORREO</li>
         <li>CARGA TU CARTERA</li>
       </ul>
       <!-- fieldsets -->
-      <fieldset>
-        <h2 class="fs-title">INGRESA TU CORREO Y CONTRASEÑA</h2>
-        <h3 class="fs-subtitle" id="normal-message">
-          Ingresa tus credenciales para verificarlas en nuestra base de Datos
-        </h3>
-        <h3 class="fs-subtitle error" id="error-message">
-          Usuario no encontrado
-        <h3 class="fs-subtitle error" id="error-message-2">
-          Contraseña incorrecta 
-        </h3>
-        <h3 class="fs-subtitle error" id="error-message-3">
-          Ya usted ha registrado su cartera
-        </h3>
-        <input id="email-input" type="text" name="email" placeholder="Email" />
-        <input
-          id="password-input"
-          type="password"
-          name="password"
-          placeholder="Password"
-        />
-        <input
-          type="button"
-          name="next"
-          class="action-button next"
-          value="Next"
-        />
-        <!-- <input onclick="verifCorreo()" type="button" name="next" class="next action-button" value="Next" /> -->
-      </fieldset>
+      <div class="animate__animated animate__fadeInUp">
 
-      <fieldset>
-        <h2 class="fs-title">VERIFICA TU CODIGO HASH</h2>
-        <h3 class="fs-subtitle" id="base">
-          Carga tu cartera
-        </h3>
-        <h3 class="fs-subtitle success" id="success">
-          Cartera Cargada Exitosamente
-        </h3>
-        <h3 class="fs-subtitle not-success" id="not-success">
-          Verifique Tenga Metamask y que se encuentre en la red Goerly
-        </h3>
-        <input type="text" id="hash" name="hash-dir" placeholder="Hash" disabled/>
-        <input
-          type="button"
-          name="previous"
-          class="previous action-button"
-          value="Previous"
-        />
-        <input
-          type="button"
-          name="next"
-          class="action-button hash"
-          value="Cargar"
-        />
-        
+        <fieldset >
+          <h2 class="fs-title">INGRESA TU CORREO Y CONTRASEÑA</h2>
+          <h3 class="fs-subtitle" id="normal-message">
+            Ingresa tus credenciales para verificarlas en nuestra base de Datos
+          </h3>
+          <h3 class="fs-subtitle error" id="error-message">
+            Usuario no encontrado
+          <h3 class="fs-subtitle error" id="error-message-2">
+            Contraseña incorrecta 
+          </h3>
+          <h3 class="fs-subtitle error" id="error-message-3">
+            Ya usted ha registrado su cartera
+          </h3>
+          <input id="email-input" type="text" name="email" placeholder="Email" />
+          <input
+            id="password-input"
+            type="password"
+            name="password"
+            placeholder="Password"
+          />
+          <input
+            type="button"
+            name="next"
+            class="action-button next"
+            value="Next"
+          />
+          <!-- <input onclick="verifCorreo()" type="button" name="next" class="next action-button" value="Next" /> -->
+        </fieldset>
+  
+        <fieldset>
+          <h2 class="fs-title">VERIFICA TU CODIGO HASH</h2>
+          <h3 class="fs-subtitle" id="base">
+            Carga tu cartera
+          </h3>
+          <h3 class="fs-subtitle success" id="success">
+            Cartera Cargada Exitosamente
+          </h3>
+          <h3 class="fs-subtitle not-success" id="not-success">
+            Verifique Tenga Metamask y que se encuentre en la red Goerly
+          </h3>
+          <h3 class="fs-subtitle not-success" id="not-success-2">
+            La Cartera ya Existe
+          </h3>
+          <input type="text" id="hash" name="hash-dir" placeholder="Hash" disabled/>
+          <input
+            type="button"
+            name="previous"
+            class="previous action-button"
+            value="Previous"
+          />
+          <input
+            type="button"
+            name="next"
+            class="action-button hash"
+            value="Cargar"
+          />
+         </fieldset> 
+      </div>
 
     </form>
     <!-- partial -->

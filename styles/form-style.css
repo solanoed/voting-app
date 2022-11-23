@@ -54,18 +54,16 @@ body {
 	color: #2C3E50;
 	font-size: 13px;
 }
-.fs-subtitle.error{
-  color:red;
-  display:none;
-}
+
 .fs-subtitle.success{
-  color:greenyellow;
+  color:green;
   display:none;
 }
-.fs-subtitle.not-success{
+.fs-subtitle.not-success, .fs-subtitle.not-success-2, .fs-subtitle.error{
   color:red;
   display:none;
 }
+
 /*buttons*/
 #msform .action-button {
 	width: 100px;
