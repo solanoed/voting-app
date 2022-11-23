@@ -13,12 +13,15 @@
     <link rel="stylesheet" href="/styles/voting.css" />
     <link rel="stylesheet" href="/styles/voting-media-queries.css" />
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
     <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
     <script src="https://unpkg.com/moralis-v1/dist/moralis.js"></script>
   </head>
 
-  <body >
+  <body>
     <div class="app-overlay"></div>
 
     <header>
@@ -27,23 +30,11 @@
           <img src="/assets/colombita.png" />
         </a>
         <h1>VOTACION ELECCIONES COLOMBIA 2022</h1>
-        <button
-          class="btn-votar sustraer"
-          id="btn-sustraer"
-        >
-        ⬇
-        </button>
-        <button
-          class="btn-votar sustraer"
-          id="btn-inicio"
-        >
-        Iniciar
-        </button>
       </div>
     </header>
 
     <main>
-      <div class="cards">
+      <div class="cards animate__animated animate__fadeInUp">
         <div class="card">
           <img class="card-image" src="/assets/petrico.png" />
           <div class="card-info">

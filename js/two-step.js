@@ -147,11 +147,12 @@ const createCartera = async () => {
     );
       if (resp.data.mensaje=="La cartera ya existe") {
         errorInter("La cartera ya existe")
+        }else{
+          setTimeout(() => {
+            window.location.replace("../index.html");
+          }, "5000")
         }
       console.log(resp.data.mensaje)
-      // setTimeout(() => {
-      //   window.location.replace("../index.html");
-      // }, "5000")
   } catch (error) {
     console.log("create cartera: "+ error);
   }
