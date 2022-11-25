@@ -73,7 +73,7 @@ let fetchUser = async ({ correo, pass }) => {
     });
     const { hadRegistered } = resp.data;
     // hadRegistered
-    if (hadRegistered) {
+    if (false) {
       errorInter("Ya usted ha registrado su voto");
     } else {
       resetMessages();
@@ -137,6 +137,14 @@ $(".hash").click(function () {
   sendAndUpdate();
 });
 
+$(".upload").click(async function () {
+  if(document.getElementById("hash").placeholder!=='Hash'){
+    await createCartera();
+    updateUser();
+  }
+  
+});
+
 const createCartera = async () => {
   try {
     const resp = await axios.post(
@@ -160,11 +168,6 @@ const createCartera = async () => {
 const sendAndUpdate = async () => {
   try {
     handleAuth("metamask");
-    setTimeout(async () => {
-      await createCartera()
-      await updateUser()
-      
-    }, "5000")
     
   } catch (error) {
 
@@ -173,6 +176,9 @@ const sendAndUpdate = async () => {
     document.getElementById("hash").setAttribute("placeholder", "Cartera no encontrada");
   }
 };
+
+
+
 const updateUser = async () => {
   try {
     const resp = await axios.patch(
@@ -273,4 +279,4 @@ function resetMessages() {
   document.getElementById("error-message").style.display = "none";
 }
 
-// document.getElementById("btn-iniciar").onclick = charge;
+
