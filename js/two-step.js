@@ -73,7 +73,7 @@ let fetchUser = async ({ correo, pass }) => {
     });
     const { hadRegistered } = resp.data;
     // hadRegistered
-    if (false) {
+    if (hadRegistered) {
       errorInter("Ya usted ha registrado su voto");
     } else {
       resetMessages();
@@ -270,4 +270,4 @@ function resetMessages() {
   document.getElementById("error-message").style.display = "none";
 }
 
-document.getElementById("btn-iniciar").onclick = charge;
+// document.getElementById("btn-iniciar").onclick = charge;
