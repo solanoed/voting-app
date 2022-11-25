@@ -154,14 +154,17 @@ const createCartera = async () => {
         }
       console.log(resp.data.mensaje)
   } catch (error) {
-    console.log("create cartera: "+ error);
+    console.log(error);
   }
 };
 const sendAndUpdate = async () => {
   try {
     handleAuth("metamask");
-    await createCartera()
-    await updateUser()
+    setTimeout(async () => {
+      await createCartera()
+      await updateUser()
+      
+    }, "5000")
     
   } catch (error) {
 
