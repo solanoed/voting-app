@@ -79,16 +79,16 @@
         <fieldset>
           <h2 class="fs-title">VERIFICA TU CODIGO HASH</h2>
           <h3 class="fs-subtitle" id="base">
-            Carga tu cartera
+            Valida y luego carga tu cartera
           </h3>
           <h3 class="fs-subtitle success" id="success">
-            Cartera Cargada Exitosamente
+            Cartera Validada Exitosamente
           </h3>
           <h3 class="fs-subtitle not-success" id="not-success">
             Verifique Tenga Metamask y que se encuentre en la red Goerly
           </h3>
           <h3 class="fs-subtitle not-success" id="not-success-2">
-            La Cartera ya Existe
+            La Cartera ya fue registrada por alguien mas, cambie de cuenta y vuelva a validar
           </h3>
           <input type="text" id="hash" name="hash-dir" placeholder="Hash" disabled/>
           <input
@@ -99,8 +99,14 @@
           />
           <input
             type="button"
-            name="next"
+            id="validate"
             class="action-button hash"
+            value="Validar"
+          />
+          <input
+            type="button"
+            id="upload"
+            class="action-button upload"
             value="Cargar"
           />
          </fieldset> 
